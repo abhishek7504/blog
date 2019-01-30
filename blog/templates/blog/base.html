@@ -1,0 +1,93 @@
+{% load blog_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <link href="{% static '/css/custom.css' %}" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+    crossorigin="anonymous">
+
+</head>
+
+<body class="">
+  <!-- Nav bar   -->
+  <div class="navbar-fixed">
+    <nav style="background-color: #2c3e50;">
+      
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo center">blOgeN</a>
+      </div>
+    </nav>
+  </div>
+  <!-- Nav bar ends -->
+
+  <div class="row">
+    <div class="col xl3 l3  m12 s12">
+      <h5 class="center flow-text">Total Post {% total_tags %}</h5> 
+      {% show_latest_post %}
+    </div>
+
+
+    <div class="col xl6 l6 m12 s12">
+      {% block content %}
+      {% endblock %}
+    </div>
+
+
+
+    <div class="col xl3 l3  m12 s12">       
+        <h5 class="center flow-text">Most Commented Post</h5>
+        <div class="collection">
+          {% get_most_commented_posts as most_commented_posts %}
+          {% for post in most_commented_posts %}
+          <a href="{{ post.get_absolute_url }}" class="collection-item">
+            <span class="badge new" data-badge-caption="comment">{{ post.comments.count }}</span> {{ post.title }}</a>
+          {% endfor %}
+        </div>
+    
+    </div>
+  </div>
+
+
+
+
+  <footer class="page-footer" style="background-color: #2c3e50;">
+    <div class="container">
+      <div class="row">
+        <div class="col xl6 offset-xl3 l6 offset-l3  m8 offset-m2 s10 offset-1">
+          <h5 class="grey-text text-lighten-3 center">blOgeN</h5>
+          This website is created under demonstration purpose and as a part of portfolio collection and client
+          proposal. <blockquote>By Abhishek Gupta| Web developer and Progammer</blockquote>
+          <p><i class="material-icons center left">mail</i> gupta1997abhishek@gmail.com</p>
+          <p><i class="material-icons center left">phone</i>9971271794</p>
+        </div>
+
+      </div>
+    </div>
+    <div class="footer-copyright teal lighten-2">
+      <div class="container">
+        Copyright &copy; 2018
+        <a href="#!" class="grey-text text-lighten-3 right"><i class="material-icons red-text accent-2 left">favorite_border</i>
+          Made with love</a>
+      </div>
+    </div>
+
+  </footer>
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script>
+    // JAVASCRIPTS STARTS HERE
+    $('.modal').modal();
+
+  </script>
+</body>
+
+</html>

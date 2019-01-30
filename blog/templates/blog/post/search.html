@@ -1,0 +1,33 @@
+<!-- SEARCH BOX -->
+<nav class="white">
+  <div class="nav-wrapper">
+    <form action="." method="get">
+      <div class="input-field">
+        {{ form }}
+        <label><i class="material-icons blue-grey-text">search</i></label>
+        <i class="material-icons">close</i>
+      </div>
+    </form>
+
+  </div>
+</nav>
+<!-- SEARCH BOX ENDS -->
+
+<!-- RESULTS -->
+{% if query %}
+<div class="card-panel teal lighten-2">
+  <h4 class="center white-text">Posts containing "{{ query }}"</h4>
+</div>
+<h5>
+  {% with results.count as total_results %}
+  Found {{ total_results }} result{{ total_results|pluralize}}
+  {% endwith %}
+</h5>
+{% for post in results %}
+{% include 'blog/post/list_snippet.html' %}
+{% empty %}
+<p class="red-text">There are no results for your query.</p>
+{% endfor %}
+<hr />
+{% endif %}
+<!-- RESULTS ENDS -->
